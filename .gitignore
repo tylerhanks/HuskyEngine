@@ -1,0 +1,7 @@
+# Directories
+bin/
+.vs/
+
+# Files
+*.user
+*.filters
