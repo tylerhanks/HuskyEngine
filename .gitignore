@@ -1,6 +1,7 @@
 # Directories
 bin/
 .vs/
+Husky/vendor/SDL2/*
 
 # Files
 *.user
