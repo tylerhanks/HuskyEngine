@@ -1,5 +1,6 @@
 #pragma once
-#include "Window.h"
+#include "LayerStack.h"
+#include "Log.h"
 
 namespace husky {
 
@@ -12,15 +13,21 @@ namespace husky {
 		void Run();
 		bool Construct(int width, int height, bool full_screen);
 
+		void PushLayer(Layer* layer);
+
 	protected:
 		virtual bool OnCreate();
-		virtual bool OnUpdate(float delta_time);
 		virtual void OnDestroy();
 
 		bool m_running;
 
 	private:
+		bool OnUpdate(float delta_time);
 
+		LayerStack m_layer_stack;
+		std::vector<Layer*> m_tbd_layers;
+		SDL_Event e;
+		SDL_Window* m_window;
 	};
 
 	// To be defined in CLIENT.
