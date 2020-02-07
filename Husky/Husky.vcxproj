@@ -14,9 +14,12 @@
     <ClInclude Include="src\Husky.h" />
     <ClInclude Include="src\Husky\EntryPoint.h" />
     <ClInclude Include="src\Husky\Game.h" />
+    <ClInclude Include="src\Husky\Log.h" />
+    <ClInclude Include="src\Husky\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Husky\Game.cpp" />
+    <ClCompile Include="src\Husky\Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
