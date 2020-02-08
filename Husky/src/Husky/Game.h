@@ -10,10 +10,13 @@ namespace husky {
 		Game();
 		virtual ~Game();
 
-		void Run();
 		bool Construct(int width, int height, bool full_screen);
 
+		void SetAssetPath(const std::string& project_dir, const std::string& asset_dir);
+
 		void PushLayer(Layer* layer);
+
+		void Run();
 
 	protected:
 		virtual bool OnCreate();
@@ -22,7 +25,7 @@ namespace husky {
 		bool m_running;
 
 	private:
-		bool OnUpdate(float delta_time);
+		bool Update(float delta_time);
 
 		LayerStack m_layer_stack;
 		std::vector<Layer*> m_tbd_layers;

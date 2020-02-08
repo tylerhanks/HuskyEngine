@@ -1,8 +1,9 @@
-#include "Game.h"
-
+#include <chrono>
 #include <iostream>
 #include <SDL.h>
-#include <chrono>
+
+#include "Game.h"
+#include "Renderer.h"
 
 husky::Game::Game()
 	:
@@ -13,6 +14,8 @@ husky::Game::Game()
 
 husky::Game::~Game()
 {
+	SDL_DestroyWindow(m_window);
+	Renderer::Shutdown();
 }
 
 void husky::Game::Run()
@@ -28,7 +31,7 @@ void husky::Game::Run()
 		std::chrono::duration<float> delta_time = t2 - t1;
 		t1 = t2;
 
-		m_running = OnUpdate(delta_time.count());
+		m_running = Update(delta_time.count());
 	}
 
 	OnDestroy();
@@ -44,10 +47,18 @@ bool husky::Game::Construct(int width, int height, bool full_screen)
 		return false;
 	}
 	else
+	{
+		Renderer::Init(m_window);
 		return true;
+	}
 }
 
-bool husky::Game::OnUpdate(float delta_time)
+void husky::Game::SetAssetPath(const std::string& project_dir, const std::string& asset_dir)
+{
+	Renderer::SetAssetPath(project_dir + '\\' + asset_dir);
+}
+
+bool husky::Game::Update(float delta_time)
 {
 	//handle events
 	while (SDL_PollEvent(&e) != 0)
@@ -77,11 +88,23 @@ bool husky::Game::OnUpdate(float delta_time)
 		}
 	}
 
+	//delete layers that are finished
 	for (auto tbd_layer : m_tbd_layers)
 	{
 		m_layer_stack.PopLayer(tbd_layer);
 	}
 
+	//render layers
+	Renderer::Clear();
+
+	for (auto it = m_layer_stack.begin(); it != m_layer_stack.end(); it++)
+	{
+		(*it)->OnRender();
+	}
+
+	Renderer::Present();
+
+	//if no more layers, game is over
 	return m_layer_stack.size();
 }
 

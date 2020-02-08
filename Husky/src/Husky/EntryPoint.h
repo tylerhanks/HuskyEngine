@@ -6,6 +6,8 @@ extern husky::Game* husky::CreateGame();
 
 int main(int argc, char** argv)
 {
+	HS_CORE_LOG(std::cout, "Initializing Husky Engine..");
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		HS_CORE_ERROR(std::cout, "Failed to initialize");
@@ -14,9 +16,22 @@ int main(int argc, char** argv)
 
 	auto game = husky::CreateGame();
 
-	game->Run();
+	if (game != nullptr)
+	{
+		game->Run();
 
-	delete game;
+		delete game;
 
-	return 0;
+		SDL_Quit();
+
+		return 0;
+	}
+	else
+	{
+		HS_CORE_ERROR(std::cout, "Failed to create game");
+
+		SDL_Quit();
+
+		return -1;
+	}
 }

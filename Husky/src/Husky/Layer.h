@@ -17,6 +17,9 @@ namespace husky {
 		//Called every frame. Return false to indicate the layer should be popped.
 		virtual bool OnUpdate(float delta_time) { return false; }
 
+		//Called every frame. Place calls to Renderer here.
+		virtual void OnRender() {}
+
 		//Called on an event.
 		//Return true to indicate the event has been handled or false to indicate that it should continue being propogated.
 		virtual bool OnEvent(SDL_Event& e) { return false; }
