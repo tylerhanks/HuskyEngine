@@ -18,6 +18,9 @@ namespace husky {
 
 		void Run();
 
+		inline int Width() const { return m_width; }
+		inline int Height() const { return m_height; }
+
 	protected:
 		virtual bool OnCreate();
 		virtual void OnDestroy();
@@ -31,6 +34,8 @@ namespace husky {
 		std::vector<Layer*> m_tbd_layers;
 		SDL_Event e;
 		SDL_Window* m_window;
+
+		int m_width, m_height;
 	};
 
 	// To be defined in CLIENT.

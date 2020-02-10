@@ -2,6 +2,8 @@
 #include <SDL.h>
 #include <string>
 
+#include "Vector2D.h"
+
 namespace husky {
 
 	class Renderer;
@@ -31,6 +33,7 @@ namespace husky {
 
 		static Texture* LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "");
 		static void DrawTexture(Texture* tex, int x_pos, int y_pos, int scale = 1);
+		static void DrawTexture(Texture* tex, const Vec2i& pos, int scale = 1);
 
 		static void Shutdown();
 

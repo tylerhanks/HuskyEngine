@@ -57,7 +57,7 @@ public:
 
 	void OnRender() override
 	{
-		husky::Renderer::DrawTexture(m_heart, 30, 40, 10);
+		husky::Renderer::DrawTexture(m_heart, husky::Vec2f(30.2f, 20.3f), 10);
 	}
 
 private:
@@ -68,7 +68,7 @@ private:
 husky::Game* husky::CreateGame()
 {
 	SandboxGame* example = new SandboxGame();
-	if (example->Construct(640, 480, false))
+	if (example->Construct(1920, 1080, false))
 	{
 		example->SetAssetPath("SandboxGame", "assets");
 		example->PushLayer(new ExampleLayer());

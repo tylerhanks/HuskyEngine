@@ -87,6 +87,11 @@ void husky::Renderer::DrawTexture(Texture* tex, int x_pos, int y_pos, int scale)
 	SDL_RenderCopy(m_renderer, tex->m_tex, NULL, &dst);
 }
 
+void husky::Renderer::DrawTexture(Texture* tex, const Vec2i& pos, int scale)
+{
+	DrawTexture(tex, pos.x, pos.y, scale);
+}
+
 void husky::Renderer::Shutdown()
 {
 	SDL_DestroyRenderer(m_renderer);

@@ -8,7 +8,10 @@
 husky::Game::Game()
 	:
 	m_running(false),
-	m_window(NULL)
+	m_window(NULL),
+	m_width(0),
+	m_height(0),
+	e(SDL_Event())
 {
 }
 
@@ -39,8 +42,14 @@ void husky::Game::Run()
 
 bool husky::Game::Construct(int width, int height, bool full_screen)
 {
-	m_window = SDL_CreateWindow("HuskyEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-
+	if (full_screen)
+	{
+		m_window = SDL_CreateWindow("HuskyEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
+	}
+	else
+	{
+		m_window = SDL_CreateWindow("HuskyEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+	}
 	if (m_window == NULL)
 	{
 		HS_CORE_ERROR(std::cout, "Failed to create window");

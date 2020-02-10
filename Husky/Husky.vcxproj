@@ -17,6 +17,7 @@
     <ClInclude Include="src\Husky\Layer.h" />
     <ClInclude Include="src\Husky\LayerStack.h" />
     <ClInclude Include="src\Husky\Log.h" />
+    <ClInclude Include="src\Husky\Vector2D.h" />
     <ClInclude Include="src\Husky\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
