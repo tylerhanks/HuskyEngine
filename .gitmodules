@@ -1,0 +1,3 @@
+[submodule "Husky/vendor/imgui"]
+	path = Husky/vendor/imgui
+	url = git@github.com:tylerhanks/imgui.git

@@ -13,6 +13,11 @@ workspace "HuskyEngine"
         "MultiProcessorCompile"
     }
 
+group "submodules"
+    include "Husky/vendor/imgui"
+
+group ""
+
 project "Husky"
     location "Husky"
     kind "StaticLib"
@@ -32,7 +37,8 @@ project "Husky"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/SDL2/include"
+        "%{prj.name}/vendor/SDL2/include",
+        "%{prj.name}/vendor/imgui"
     }
 
     libdirs
@@ -43,7 +49,8 @@ project "Husky"
     links
     {
         "SDL2.lib",
-        "SDL2main.lib"
+        "SDL2main.lib",
+        "ImGui"
     }
 
     filter "system:windows"

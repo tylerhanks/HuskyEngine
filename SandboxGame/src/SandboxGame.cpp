@@ -67,7 +67,6 @@ private:
 
 husky::Game* husky::CreateGame()
 {
-	Vector2D<std::string> test("tits", "balls");
 	SandboxGame* example = new SandboxGame();
 	if (example->Construct(1920, 1080, false))
 	{
