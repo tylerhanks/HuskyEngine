@@ -2,7 +2,6 @@
 bin/
 bin-int/
 .vs/
-Husky/vendor/SDL2/*
 
 # Files
 **.sln
