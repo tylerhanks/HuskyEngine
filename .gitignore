@@ -1,8 +1,11 @@
 # Directories
 bin/
+bin-int/
 .vs/
 Husky/vendor/SDL2/*
 
 # Files
-*.user
-*.filters
+**.sln
+**.vcxproj
+**.vcxproj.user
+**.vcxproj.filters
