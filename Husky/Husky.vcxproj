@@ -17,6 +17,7 @@
     <ClInclude Include="src\Husky\Layer.h" />
     <ClInclude Include="src\Husky\LayerStack.h" />
     <ClInclude Include="src\Husky\Log.h" />
+    <ClInclude Include="src\Husky\Rect.h" />
     <ClInclude Include="src\Husky\Vector2D.h" />
     <ClInclude Include="src\Husky\Renderer.h" />
   </ItemGroup>
@@ -24,6 +25,7 @@
     <ClCompile Include="src\Husky\Game.cpp" />
     <ClCompile Include="src\Husky\LayerStack.cpp" />
     <ClCompile Include="src\Husky\Log.cpp" />
+    <ClCompile Include="src\Husky\Rect.cpp" />
     <ClCompile Include="src\Husky\Renderer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
