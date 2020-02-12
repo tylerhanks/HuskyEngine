@@ -51,7 +51,7 @@ project "Husky"
 
         postbuildcommands
         {
-            "copy %{prj.location}\\vendor\\SDL2\\lib\\x64\\SDL2.dll %{wks.location}\\bin\\%{cfg.buildcfg}\\SandboxGame"
+            "{COPY} %{prj.location}vendor\\SDL2\\lib\\x64\\SDL2.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame"
         }
 
     filter "configurations:Debug"
