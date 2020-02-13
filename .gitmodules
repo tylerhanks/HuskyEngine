@@ -1,3 +1,6 @@
 [submodule "Husky/vendor/imgui"]
 	path = Husky/vendor/imgui
 	url = git@github.com:tylerhanks/imgui.git
+[submodule "Husky/vendor/imgui_sdl"]
+	path = Husky/vendor/imgui_sdl
+	url = git@github.com:Tyyppi77/imgui_sdl.git

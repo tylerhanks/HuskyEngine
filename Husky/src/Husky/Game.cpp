@@ -1,6 +1,8 @@
 #include <chrono>
 #include <iostream>
 #include <SDL.h>
+#include <imgui.h>
+#include <imgui_sdl.h>
 
 #include "Game.h"
 #include "Renderer.h"
@@ -58,6 +60,9 @@ bool husky::Game::Construct(int width, int height, bool full_screen)
 	else
 	{
 		Renderer::Init(m_window);
+		//set up imgui
+		ImGui::CreateContext();
+		ImGuiSDL::Initialize(Renderer::GetSDLRenderer(), width, height);
 		return true;
 	}
 }
@@ -110,6 +115,17 @@ bool husky::Game::Update(float delta_time)
 	{
 		(*it)->OnRender();
 	}
+
+	//test imgui rendering
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = delta_time;
+
+	ImGui::NewFrame();
+	bool show = true;
+	ImGui::ShowDemoWindow(&show);
+
+	ImGui::Render();
+	ImGuiSDL::Render(ImGui::GetDrawData());
 
 	Renderer::Present();
 

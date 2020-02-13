@@ -37,6 +37,9 @@ namespace husky {
 
 		static void Shutdown();
 
+		// For internal use only.
+		inline static SDL_Renderer* GetSDLRenderer() { return m_renderer; }
+
 	private:
 		static SDL_Renderer* m_renderer;
 		static std::string m_asset_path;

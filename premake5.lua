@@ -31,14 +31,17 @@ project "Husky"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/imgui_sdl/imgui_sdl.h",
+        "%{prj.name}/vendor/imgui_sdl/imgui_sdl.cpp"
     }
 
     includedirs
     {
         "%{prj.name}/src",
         "%{prj.name}/vendor/SDL2/include",
-        "%{prj.name}/vendor/imgui"
+        "%{prj.name}/vendor/imgui",
+        "%{prj.name}/vendor/imgui_sdl"
     }
 
     libdirs
