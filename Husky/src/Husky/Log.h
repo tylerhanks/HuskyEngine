@@ -14,7 +14,7 @@ namespace husky {
 
 }
 
-#ifdef _DEBUG
+#ifdef HS_DEBUG
 	#define HS_LOG(os, msg) husky::logClientTrace(os, msg)
 	#define HS_CORE_LOG(os, msg) husky::logCoreTrace(os, msg)
 	#define HS_ERROR(os, msg) husky::logClientError(os, msg)

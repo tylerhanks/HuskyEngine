@@ -20,6 +20,9 @@ namespace husky {
 		//Called every frame. Place calls to Renderer here.
 		virtual void OnRender() {}
 
+		//Override this function to render ImGui ui objects.
+		virtual void OnImGuiRender() {}
+
 		//Called on an event.
 		//Return true to indicate the event has been handled or false to indicate that it should continue being propogated.
 		virtual bool OnEvent(SDL_Event& e) { return false; }

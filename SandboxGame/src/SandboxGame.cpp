@@ -43,7 +43,7 @@ public:
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
 			HS_LOG(std::cout, "Mousedown event");
-			m_running = false;
+			//m_running = false;
 			return true;
 		}
 
@@ -52,16 +52,25 @@ public:
 
 	bool OnUpdate(float dt) override
 	{
+		//m_heart_pos += m_heart_vel * dt;
 		return m_running;
 	}
 
 	void OnRender() override
 	{
-		husky::Renderer::DrawTexture(m_heart, husky::Vec2f(30.2f, 20.3f), 10);
+		husky::Renderer::DrawTexture(m_heart, m_heart_pos, 10);
+	}
+
+	void OnImGuiRender() override
+	{
+		bool show = true;
+		ImGui::ShowDemoWindow(&show);
 	}
 
 private:
 	husky::Texture* m_heart = nullptr;
+	husky::Vec2f m_heart_pos = { 0.0f, 0.0f };
+	husky::Vec2f m_heart_vel = { 100.0f, 0.0f };
 	bool m_running = true;
 };
 

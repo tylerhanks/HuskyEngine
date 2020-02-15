@@ -7,14 +7,19 @@
 #include "Game.h"
 #include "Renderer.h"
 
+husky::Game* husky::Game::s_instance = nullptr;
+
 husky::Game::Game()
 	:
 	m_running(false),
 	m_window(NULL),
 	m_width(0),
 	m_height(0),
-	e(SDL_Event())
+	e(SDL_Event()),
+	m_imgui_layer(nullptr)
 {
+	// TODO: assert that s_instance is nullptr
+	s_instance = this;
 }
 
 husky::Game::~Game()
@@ -29,6 +34,9 @@ void husky::Game::Run()
 
 	auto t1 = std::chrono::system_clock::now();
 	auto t2 = std::chrono::system_clock::now();
+
+	m_imgui_layer = new ImGuiLayer();
+	PushLayer(m_imgui_layer);
 
 	while (m_running)
 	{
@@ -74,6 +82,8 @@ void husky::Game::SetAssetPath(const std::string& project_dir, const std::string
 
 bool husky::Game::Update(float delta_time)
 {
+	ImGuiIO& io = ImGui::GetIO();
+
 	//handle events
 	while (SDL_PollEvent(&e) != 0)
 	{
@@ -93,6 +103,16 @@ bool husky::Game::Update(float delta_time)
 		}
 	}
 
+	//temporary
+
+	/*int mouseX, mouseY;
+	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+
+	// Setup low-level inputs (e.g. on Win32, GetKeyboardState(), or write to those fields from your Windows message loop handlers, etc.)
+	io.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
+	io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+	io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);*/
+
 	//update layers
 	for (auto it = m_layer_stack.begin(); it != m_layer_stack.end(); it++)
 	{
@@ -108,21 +128,24 @@ bool husky::Game::Update(float delta_time)
 		m_layer_stack.PopLayer(tbd_layer);
 	}
 
+	//render imgui
+	m_imgui_layer->Begin();
+
+	for (auto it = m_layer_stack.begin(); it != m_layer_stack.end(); it++)
+	{
+		(*it)->OnImGuiRender();
+	}
+
+	m_imgui_layer->End();
+
 	//render layers
+	SDL_SetRenderDrawColor(Renderer::GetSDLRenderer(), 255, 144, 200, 255);
 	Renderer::Clear();
 
 	for (auto it = m_layer_stack.begin(); it != m_layer_stack.end(); it++)
 	{
 		(*it)->OnRender();
 	}
-
-	//test imgui rendering
-	ImGuiIO& io = ImGui::GetIO();
-	io.DeltaTime = delta_time;
-
-	ImGui::NewFrame();
-	bool show = true;
-	ImGui::ShowDemoWindow(&show);
 
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
