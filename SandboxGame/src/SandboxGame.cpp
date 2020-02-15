@@ -23,7 +23,7 @@ public:
 	void OnAttach() override
 	{
 		HS_LOG(std::cout, "Attaching example layer");
-		m_heart = husky::Renderer::LoadTextureFromBMP("80s_heart.bmp", "sprites");
+		m_heart = husky::Renderer::LoadTextureFromBMP("80s_heart.bmp", "sprites", husky::colors::Black);
 		m_font = husky::Renderer::LoadFontFromTTF("aesymatt.ttf", 30, "fonts");
 	}
 
@@ -65,7 +65,7 @@ public:
 	void OnRender() override
 	{
 		husky::Renderer::DrawTexture(m_heart, m_heart_pos, 10);
-		m_text = husky::Renderer::RenderText(m_message, m_font, husky::Color(0, 0, 0, 255), husky::TextRenderMode::Solid, husky::Color(255, 255, 255, 255));
+		m_text = husky::Renderer::RenderText(m_message, m_font, husky::colors::Black, husky::TextRenderMode::Solid, husky::colors::White);
 		husky::Renderer::DrawTexture(m_text, m_text_pos);
 	}
 

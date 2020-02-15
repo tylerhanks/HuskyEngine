@@ -125,7 +125,7 @@ husky::Texture* husky::Renderer::RenderText(const std::string& message, Font* fo
 	}
 }
 
-husky::Texture* husky::Renderer::LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir)
+husky::Texture* husky::Renderer::LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir, const Color& chroma)
 {
 	std::string full_path = m_asset_path + sub_dir + PATH_SEP + bmp_file_name;
 
@@ -134,6 +134,7 @@ husky::Texture* husky::Renderer::LoadTextureFromBMP(const std::string& bmp_file_
 
 	if (surf)
 	{
+		SDL_SetColorKey(surf, SDL_TRUE, SDL_MapRGB(surf->format, chroma.m_color.r, chroma.m_color.g, chroma.m_color.b));
 		tex = SDL_CreateTextureFromSurface(m_renderer, surf);
 		SDL_FreeSurface(surf);
 

@@ -20,13 +20,34 @@ namespace husky {
 	{
 	public:
 		Color();
-		Color(int r, int g, int b, int a);
+		Color(int r, int g, int b, int a = 255);
 
 		friend class Renderer;
 
 	private:
 		SDL_Color m_color;
 	};
+
+	namespace colors {
+
+		static const Color Black(0, 0, 0);
+		static const Color White(255, 255, 255);
+		static const Color Red(255, 0, 0);
+		static const Color Lime(0, 255, 0);
+		static const Color Blue(0, 0, 255);
+		static const Color Yellow(255, 255, 0);
+		static const Color Cyan(0, 255, 255);
+		static const Color Magenta(255, 0, 255);
+		static const Color Silver(192, 192, 192);
+		static const Color Gray(128, 128, 128);
+		static const Color Maroon(128, 0, 0);
+		static const Color Olive(128, 128, 0);
+		static const Color Green(0, 128, 0);
+		static const Color Purple(128, 0, 128);
+		static const Color Teal(0, 128, 128);
+		static const Color Navy(0, 0, 128);
+
+	}
 
 	struct Texture
 	{
@@ -67,7 +88,7 @@ namespace husky {
 		static Font* LoadFontFromTTF(const std::string& font_file_name, int font_size, const std::string& sub_dir = "");
 		static Texture* RenderText(const std::string& message, Font* font, const Color& color, TextRenderMode mode, const Color& bg_color);
 
-		static Texture* LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "");
+		static Texture* LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "", const Color& chroma = colors::Magenta);
 		static void DrawTexture(Texture* tex, int x_pos, int y_pos, int scale = 1);
 		static void DrawTexture(Texture* tex, const Vec2i& pos, int scale = 1);
 
