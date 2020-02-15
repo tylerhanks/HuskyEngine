@@ -10,10 +10,6 @@
 static bool g_MousePressed[3] = { false, false, false };
 static SDL_Cursor* g_MouseCursors[ImGuiMouseCursor_COUNT] = {};
 
-husky::ImGuiLayer::ImGuiLayer()
-{
-}
-
 void husky::ImGuiLayer::OnAttach()
 {
     HS_CORE_LOG(std::cout, "Attaching imgui layer");

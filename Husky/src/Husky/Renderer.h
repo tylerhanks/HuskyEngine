@@ -1,12 +1,32 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <string>
 
 #include "Vector2D.h"
 
 namespace husky {
 
+	enum class TextRenderMode
+	{
+		Solid,
+		Shaded,
+		Blended
+	};
+
 	class Renderer;
+
+	struct Color
+	{
+	public:
+		Color();
+		Color(int r, int g, int b, int a);
+
+		friend class Renderer;
+
+	private:
+		SDL_Color m_color;
+	};
 
 	struct Texture
 	{
@@ -22,6 +42,19 @@ namespace husky {
 		int m_width, m_height;
 	};
 
+	struct Font
+	{
+	public:
+		Font();
+		Font(TTF_Font* font);
+		~Font();
+
+		friend class Renderer;
+
+	private:
+		TTF_Font* m_font;
+	};
+
 	class Renderer
 	{
 	public:
@@ -30,6 +63,9 @@ namespace husky {
 
 		static void Clear();
 		static void Present();
+
+		static Font* LoadFontFromTTF(const std::string& font_file_name, int font_size, const std::string& sub_dir = "");
+		static Texture* RenderText(const std::string& message, Font* font, const Color& color, TextRenderMode mode, const Color& bg_color);
 
 		static Texture* LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "");
 		static void DrawTexture(Texture* tex, int x_pos, int y_pos, int scale = 1);

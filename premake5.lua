@@ -40,19 +40,22 @@ project "Husky"
     {
         "%{prj.name}/src",
         "%{prj.name}/vendor/SDL2/include",
+        "%{prj.name}/vendor/SDL2_ttf/include",
         "%{prj.name}/vendor/imgui",
         "%{prj.name}/vendor/imgui_sdl"
     }
 
     libdirs
     {
-        "%{prj.name}/vendor/SDL2/lib/x64"
+        "%{prj.name}/vendor/SDL2/lib/x64",
+        "%{prj.name}/vendor/SDL2_ttf/lib/x64"
     }
 
     links
     {
         "SDL2.lib",
         "SDL2main.lib",
+        "SDL2_ttf.lib",
         "ImGui"
     }
 
@@ -61,7 +64,10 @@ project "Husky"
 
         postbuildcommands
         {
-            "{COPY} %{prj.location}vendor\\SDL2\\lib\\x64\\SDL2.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame"
+            "{COPY} %{prj.location}vendor\\SDL2\\lib\\x64\\SDL2.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame",
+            "{COPY} %{prj.location}vendor\\SDL2_ttf\\lib\\x64\\SDL2_ttf.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame",
+            "{COPY} %{prj.location}vendor\\SDL2_ttf\\lib\\x64\\libfreetype-6.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame",
+            "{COPY} %{prj.location}vendor\\SDL2_ttf\\lib\\x64\\zlib1.dll %{wks.location}bin\\%{cfg.buildcfg}\\SandboxGame"
         }
 
     filter "configurations:Debug"
@@ -93,12 +99,14 @@ project "SandboxGame"
     includedirs
     {
         "Husky/vendor/SDL2/include",
+        "Husky/vendor/SDL2_ttf/include",
         "Husky/src"
     }
 
     libdirs
     {
-        "Husky/vendor/SDL2/lib/x64"
+        "Husky/vendor/SDL2/lib/x64",
+        "Husky/vendor/SDL2_ttf/lib/x64"
     }
 
     links

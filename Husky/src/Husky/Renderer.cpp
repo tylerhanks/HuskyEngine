@@ -47,6 +47,84 @@ void husky::Renderer::Present()
 	SDL_RenderPresent(m_renderer);
 }
 
+husky::Font* husky::Renderer::LoadFontFromTTF(const std::string& font_file_name, int font_size, const std::string& sub_dir)
+{
+	std::string full_path = m_asset_path + sub_dir + PATH_SEP + font_file_name;
+
+	TTF_Font* font = TTF_OpenFont(full_path.c_str(), font_size);
+	if (font == nullptr)
+	{
+		HS_CORE_ERROR(std::cout, "Failed to open font");
+		return nullptr;
+	}
+	else
+	{
+		return new Font(font);
+	}
+}
+
+husky::Texture* husky::Renderer::RenderText(const std::string& message, Font* font, const Color& color, TextRenderMode mode, const Color& bg_color /*TODO: default to black*/)
+{
+	SDL_Surface* surf = nullptr;
+	SDL_Texture* tex = nullptr;
+	int w, h;
+
+	switch (mode)
+	{
+	case TextRenderMode::Solid:
+		surf = TTF_RenderText_Solid(font->m_font, message.c_str(), color.m_color);
+		if (surf == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to render text");
+			return nullptr;
+		}
+		tex = SDL_CreateTextureFromSurface(m_renderer, surf);
+		if (tex == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to create texture");
+			SDL_FreeSurface(surf);
+			return nullptr;
+		}
+		SDL_FreeSurface(surf);
+		SDL_QueryTexture(tex, NULL, NULL, &w, &h);
+		return new Texture(tex, w, h);
+	case TextRenderMode::Shaded:
+		surf = TTF_RenderText_Shaded(font->m_font, message.c_str(), color.m_color, bg_color.m_color);
+		if (surf == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to render text");
+			return nullptr;
+		}
+		tex = SDL_CreateTextureFromSurface(m_renderer, surf);
+		if (tex == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to create texture");
+			SDL_FreeSurface(surf);
+			return nullptr;
+		}
+		SDL_FreeSurface(surf);
+		SDL_QueryTexture(tex, NULL, NULL, &w, &h);
+		return new Texture(tex, w, h);
+	case TextRenderMode::Blended:
+		surf = TTF_RenderText_Blended(font->m_font, message.c_str(), color.m_color);
+		if (surf == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to render text");
+			return nullptr;
+		}
+		tex = SDL_CreateTextureFromSurface(m_renderer, surf);
+		if (tex == nullptr)
+		{
+			HS_CORE_ERROR(std::cout, "Failed to create texture");
+			SDL_FreeSurface(surf);
+			return nullptr;
+		}
+		SDL_FreeSurface(surf);
+		SDL_QueryTexture(tex, NULL, NULL, &w, &h);
+		return new Texture(tex, w, h);
+	}
+}
+
 husky::Texture* husky::Renderer::LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir)
 {
 	std::string full_path = m_asset_path + sub_dir + PATH_SEP + bmp_file_name;
@@ -116,4 +194,37 @@ husky::Texture::Texture(SDL_Texture* tex, int width, int height)
 husky::Texture::~Texture()
 {
 	SDL_DestroyTexture(m_tex);
+}
+
+husky::Color::Color()
+{
+	m_color.r = 255;
+	m_color.g = 255;
+	m_color.b = 255;
+	m_color.a = 255;
+}
+
+husky::Color::Color(int r, int g, int b, int a)
+{
+	m_color.r = r;
+	m_color.g = g;
+	m_color.b = b;
+	m_color.a = a;
+}
+
+husky::Font::Font()
+	:
+	m_font(nullptr)
+{
+}
+
+husky::Font::Font(TTF_Font* font)
+	:
+	m_font(font)
+{
+}
+
+husky::Font::~Font()
+{
+	TTF_CloseFont(m_font);
 }

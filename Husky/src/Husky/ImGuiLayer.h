@@ -6,7 +6,7 @@ namespace husky {
 	class ImGuiLayer : public Layer
 	{
 	public:
-		ImGuiLayer();
+		ImGuiLayer() = default;
 
 		void OnAttach() override;
 		void OnDetach() override;

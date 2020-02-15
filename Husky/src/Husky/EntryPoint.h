@@ -1,6 +1,7 @@
 #pragma once
 #include "Log.h"
 #include <iostream>
+#include <SDL_ttf.h>
 
 extern husky::Game* husky::CreateGame();
 
@@ -8,7 +9,7 @@ int main(int argc, char** argv)
 {
 	HS_CORE_LOG(std::cout, "Initializing Husky Engine..");
 
-	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+	if ((SDL_Init(SDL_INIT_EVERYTHING) || TTF_Init()) != 0)
 	{
 		HS_CORE_ERROR(std::cout, "Failed to initialize");
 		return -1;
