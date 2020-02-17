@@ -1,22 +1,30 @@
 #include "Log.h"
 #include <SDL.h>
+#include <iostream>
 
-void husky::logSDLError(std::ostream& os, const std::string& msg)
+static std::ostream* s_log_os = &std::cout;
+
+void husky::log::logSDLError(const std::string& msg)
 {
-	os << "SDL Error: " << msg << ". " << SDL_GetError() << std::endl;
+	(*s_log_os) << "SDL Error: " << msg << ". " << SDL_GetError() << std::endl;
 }
 
-void husky::logClientError(std::ostream& os, const std::string& msg)
+void husky::log::logClientError(const std::string& msg)
 {
-	os << "Client Error: " << msg << "." << std::endl;
+	(*s_log_os) << "Client Error: " << msg << "." << std::endl;
 }
 
-void husky::logClientTrace(std::ostream& os, const std::string& msg)
+void husky::log::logClientTrace(const std::string& msg)
 {
-	os << "Client Trace: " << msg << "." << std::endl;
+	(*s_log_os) << "Client Trace: " << msg << "." << std::endl;
 }
 
-void husky::logCoreTrace(std::ostream& os, const std::string& msg)
+void husky::log::logCoreTrace(const std::string& msg)
 {
-	os << "Core Trace: " << msg << "." << std::endl;
+	(*s_log_os) << "Core Trace: " << msg << "." << std::endl;
+}
+
+void husky::log::SetLogOutput(std::ostream& os)
+{
+	s_log_os = &os;
 }

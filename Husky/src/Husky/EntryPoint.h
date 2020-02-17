@@ -7,11 +7,11 @@ extern husky::Game* husky::CreateGame();
 
 int main(int argc, char** argv)
 {
-	HS_CORE_LOG(std::cout, "Initializing Husky Engine..");
+	HS_CORE_LOG("Initializing Husky Engine..");
 
 	if ((SDL_Init(SDL_INIT_EVERYTHING) || TTF_Init()) != 0)
 	{
-		HS_CORE_ERROR(std::cout, "Failed to initialize");
+		HS_CORE_ERROR("Failed to initialize");
 		return -1;
 	}
 
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		HS_CORE_ERROR(std::cout, "Failed to create game");
+		HS_CORE_ERROR("Failed to create game");
 
 		SDL_Quit();
 

@@ -12,7 +12,7 @@ static SDL_Cursor* g_MouseCursors[ImGuiMouseCursor_COUNT] = {};
 
 void husky::ImGuiLayer::OnAttach()
 {
-    HS_CORE_LOG(std::cout, "Attaching imgui layer");
+    HS_CORE_LOG("Attaching imgui layer");
 	//ImGui::CreateContext();
 	//ImGuiSDL::Initialize(Renderer::GetSDLRenderer(), Game::Get().Width(), Game::Get().Height());
 
@@ -64,7 +64,7 @@ void husky::ImGuiLayer::OnAttach()
 
 void husky::ImGuiLayer::OnDetach()
 {
-    HS_CORE_LOG(std::cout, "Detaching imgui layer");
+    HS_CORE_LOG("Detaching imgui layer");
 	ImGuiSDL::Deinitialize();
 	ImGui::DestroyContext();
 }

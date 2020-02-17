@@ -62,7 +62,7 @@ bool husky::Game::Construct(int width, int height, bool full_screen)
 	}
 	if (m_window == NULL)
 	{
-		HS_CORE_ERROR(std::cout, "Failed to create window");
+		HS_CORE_ERROR("Failed to create window");
 		return false;
 	}
 	else
@@ -102,16 +102,6 @@ bool husky::Game::Update(float delta_time)
 			}
 		}
 	}
-
-	//temporary
-
-	/*int mouseX, mouseY;
-	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
-
-	// Setup low-level inputs (e.g. on Win32, GetKeyboardState(), or write to those fields from your Windows message loop handlers, etc.)
-	io.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
-	io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-	io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);*/
 
 	//update layers
 	for (auto it = m_layer_stack.begin(); it != m_layer_stack.end(); it++)

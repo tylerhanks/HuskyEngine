@@ -2,17 +2,15 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
+#include <memory>
 
 #include "Vector2D.h"
+#include "Rect.h"
 
 namespace husky {
 
-	enum class TextRenderMode
-	{
-		Solid,
-		Shaded,
-		Blended
-	};
+	template<typename T>
+	using ref = std::shared_ptr<T>;
 
 	class Renderer;
 
@@ -52,7 +50,6 @@ namespace husky {
 	struct Texture
 	{
 	public:
-		Texture();
 		Texture(SDL_Texture* tex, int width, int height);
 		~Texture();
 
@@ -66,7 +63,6 @@ namespace husky {
 	struct Font
 	{
 	public:
-		Font();
 		Font(TTF_Font* font);
 		~Font();
 
@@ -85,12 +81,14 @@ namespace husky {
 		static void Clear();
 		static void Present();
 
-		static Font* LoadFontFromTTF(const std::string& font_file_name, int font_size, const std::string& sub_dir = "");
-		static Texture* RenderText(const std::string& message, Font* font, const Color& color, TextRenderMode mode, const Color& bg_color);
+		static ref<Font> LoadFontFromTTF(const std::string& font_file_name, int font_size, const std::string& sub_dir = "");
+		static ref<Texture> RenderTextSolid(const std::string& message, ref<Font> font, const Color& color);
+		static ref<Texture> RenderTextShaded(const std::string& message, ref<Font> font, const Color& fg_color, const Color& bg_color);
+		static ref<Texture> RenderTextBlended(const std::string& message, ref<Font> font, const Color& color);
 
-		static Texture* LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "", const Color& chroma = colors::Magenta);
-		static void DrawTexture(Texture* tex, int x_pos, int y_pos, int scale = 1);
-		static void DrawTexture(Texture* tex, const Vec2i& pos, int scale = 1);
+		static ref<Texture> LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "", const Color& chroma = colors::Magenta);
+		static void DrawTexture(ref<Texture> tex, int x_pos, int y_pos, int scale = 1);
+		static void DrawTexture(ref<Texture> tex, const Vec2i& pos, int scale = 1);
 
 		static void Shutdown();
 
