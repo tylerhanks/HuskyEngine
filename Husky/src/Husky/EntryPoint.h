@@ -2,6 +2,7 @@
 #include "Log.h"
 #include <iostream>
 #include <SDL_ttf.h>
+#include <Windows.h>
 
 extern husky::Game* husky::CreateGame();
 
@@ -24,6 +25,8 @@ int main(int argc, char** argv)
 		delete game;
 
 		SDL_Quit();
+
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 1);
 
 		return 0;
 	}

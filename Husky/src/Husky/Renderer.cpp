@@ -169,7 +169,24 @@ void husky::Renderer::DrawTexture(ref<Texture> tex, int x_pos, int y_pos, int sc
 
 void husky::Renderer::DrawTexture(ref<Texture> tex, const Vec2i& pos, int scale)
 {
-	DrawTexture(std::move(tex), pos.x, pos.y, scale);
+	SDL_Rect dst;
+	dst.x = pos.x;
+	dst.y = pos.y;
+	dst.w = tex->m_width * scale;
+	dst.h = tex->m_height * scale;
+
+	SDL_RenderCopy(m_renderer, tex->m_tex, NULL, &dst);
+}
+
+void husky::Renderer::DrawTexture(ref<Texture> tex, const Rect& src_rect, const Vec2i& pos, int scale)
+{
+	SDL_Rect dst;
+	dst.x = pos.x;
+	dst.y = pos.y;
+	dst.w = tex->m_width * scale;
+	dst.h = tex->m_height * scale;
+
+	SDL_RenderCopy(m_renderer, tex->m_tex, &src_rect.rec, &dst);
 }
 
 void husky::Renderer::Shutdown()

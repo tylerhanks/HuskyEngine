@@ -3,6 +3,8 @@
 
 namespace husky {
 
+	class Renderer;
+
 	struct Rect
 	{
 	public:
@@ -12,6 +14,8 @@ namespace husky {
 		Rect Intersect(const Rect& rhs) const;
 
 		bool IsEmpty();
+
+		friend class Renderer;
 
 	private:
 		Rect(const SDL_Rect& rect);

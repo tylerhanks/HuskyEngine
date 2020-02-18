@@ -89,6 +89,7 @@ namespace husky {
 		static ref<Texture> LoadTextureFromBMP(const std::string& bmp_file_name, const std::string& sub_dir = "", const Color& chroma = colors::Magenta);
 		static void DrawTexture(ref<Texture> tex, int x_pos, int y_pos, int scale = 1);
 		static void DrawTexture(ref<Texture> tex, const Vec2i& pos, int scale = 1);
+		static void DrawTexture(ref<Texture> tex, const Rect& src_rect, const Vec2i& pos, int scale = 1);
 
 		static void Shutdown();
 

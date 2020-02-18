@@ -1,4 +1,5 @@
 #include "Husky.h"
+#include <Windows.h>
 
 class SandboxGame : public husky::Game
 {
