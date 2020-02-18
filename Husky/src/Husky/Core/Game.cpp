@@ -5,7 +5,7 @@
 #include <imgui_sdl.h>
 
 #include "Game.h"
-#include "Renderer.h"
+#include "Husky/Renderer/Renderer.h"
 
 husky::Game* husky::Game::s_instance = nullptr;
 

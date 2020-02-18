@@ -5,7 +5,7 @@
 
 #include "ImGuiLayer.h"
 #include "Game.h"
-#include "Renderer.h"
+#include "Husky/Renderer/Renderer.h"
 
 static bool g_MousePressed[3] = { false, false, false };
 static SDL_Cursor* g_MouseCursors[ImGuiMouseCursor_COUNT] = {};
